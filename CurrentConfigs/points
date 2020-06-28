@@ -205,7 +205,7 @@ amenity=convention_center [0x3005 resolution 24]
 amenity=community_centre [0x2c09 resolution 24]
 amenity=community_center [0x2c09 resolution 24]
 amenity=courthouse [0x3004 resolution 24]
-amenity=drinking_water | man_made=water_well [0x5000 resolution 24]
+amenity=drinking_water | man_made=water_well [0x5000 resolution 21]
 #amenity=embassy & country=* { set name='${country} ${name|def:}' } [0x3003 resolution 24]
 amenity=embassy & country=* { set name='${name|def:} (${country})' } [0x3003 resolution 24]
 # amenity=embassy & country!=* [0x3003 resolution 24 default_name 'Embassy'] named in language specific inc/name-ru & inc/name-en 
@@ -221,12 +221,12 @@ amenity=food_court [0x2a13 resolution 24]
 amenity=bench [0x04a01 resolution 24]
 
 amenity=charging_station { name '${name} (${voltage}v)' | '${name}' | '${voltage}v' } [0x2f16 resolution 19]
-amenity=fuel [0x2f01 resolution 24 continue]
+amenity=fuel [0x2f01 resolution 24-19]
 amenity=fuel [0x11603 resolution 22-19]
 #amenity=fuel & fuel:HGV_diesel=yes [0x2f16 resolution 19] # точка перемещена в typ 2f19
 #amenity=fuel & fuel:HGV_diesel=yes { name '${name} (D)' | 'Diesel Fuel' } [0x2f16 resolution 19]
 amenity=fuel & shop=convenience [ 0x2e06 resolution 18]
-waterway=fuel [0x2f01 resolution 24 continue]
+waterway=fuel [0x2f01 resolution 24-19]
 waterway=fuel [0x11603 resolution 22-19]
 
 #amenity=fuel & fuel:diesel=yes & fuel:lpg=yes { name '${name} (D, LPG)' | '${operator} (D, LPG)' | 'Gas D, LPG'}
@@ -503,9 +503,9 @@ tourism=attraction & historic=* [0x2c02 resolution 24]
 tourism=attraction [0x2c04 resolution 24]
 tourism=artwork [0x2c04 resolution 24]
 tourism=aquarium [0x2c07 resolution 24]
-tourism=camp_site | tourism=camp_pitch {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x2b03 resolution 24] #
-tourism=caravan_site {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x2b03 resolution 24] #
-leisure=summer_camp {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x2b03 resolution 24]
+tourism=camp_site | tourism=camp_pitch {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x2b03 resolution 21] #
+tourism=caravan_site {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x2b03 resolution 21] #
+leisure=summer_camp {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x2b03 resolution 21]
 tourism=apartment [0x2b04 resolution 24]
 tourism=chalet [0x2b00 resolution 24]
 tourism=guest_house [0x2b00 resolution 24]
