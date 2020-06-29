@@ -8,13 +8,14 @@ set CONFIG_DIR=H:\master\GPS\test\CurrentConfigs
 set DESTINATION_DIR=H:\master\GPS\test\out\out
 set SPLITTER_RESULTS_DIR=h:\master\GPS\test\out
 
+rem order is significant. -c template.args should be last
 java -jar %MKGMAP_DIR%\mkgmap.jar^
   --gmapsupp^
   --style-file=%CONFIG_DIR%^
   --charset=windows-1251^
   --code-page=1251^
   --output-dir=%DESTINATION_DIR%^
-  -c %SPLITTER_RESULTS_DIR%\template.args^
   -c %CONFIG_DIR%\optionsfile.args^
   --road-name-config=%CONFIG_DIR%\roadNameConfig.txt^
-  H:\master\GPS\test\CurrentConfigs\OSM-2018.txt
+  -c %SPLITTER_RESULTS_DIR%\template.args^
+  %CONFIG_DIR%\OSM-2018.txt
