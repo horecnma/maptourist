@@ -329,10 +329,11 @@ highway=services & mkgmap:area2poi!=true [0x210f resolution 24]
 	{set distance:backward='${pk:backward}'; delete pk:backward}
 (highway=milestone | railway=milestone) & plk:backward=* 
 	{set distance:backward='${plk:backward}'; delete plk:backward}
-highway=milestone | railway=milestone
-	{name '${distance} (${distance:backward})' 
-		| '${distance}' 
-		| '${distance:backward}'} [0x05a00 resolution 22]
+
+# highway=milestone | railway=milestone
+#	{name '${distance} (${distance:backward})' 
+#		| '${distance}' 
+#		| '${distance:backward}'} [0x05a00 resolution 22]
 # highway=milestone | railway=milestone { name '${distance}'  | '${pk}' | '${pk:backward}' } [0x05a00 resolution 24]
 
 historic=museum [0x2c02 resolution 24]
@@ -426,17 +427,17 @@ mountain_pass=yes {name
 # 	| (public_transport=station & building=yes) 
 #(building=train_station 
 #	| public_transport=train_station) 
-#		& name=* [0x11601 resolution 22-21]
+#		& name=* [0x11601 resolution 22-19]
 
 #railway=station [0x2f08 resolution 22]
 railway=station & !(layer<0) [0x2f17 resolution 24 continue]
-railway=station & !(layer<0) [0x11601 resolution 22-21]
+railway=station & !(layer<0) [0x11601 resolution 22-19]
 ( public_transport=platform & rail=yes ) | railway=halt [0x2f17 resolution 24 continue]
-( public_transport=platform & rail=yes ) | railway=halt [0x11601 resolution 22-21]
+( public_transport=platform & rail=yes ) | railway=halt [0x11601 resolution 22-19]
 ( public_transport=platform & railway=platform ) & !(layer<0) & name=* [0x2f17 resolution 24]
-#( public_transport=platform & railway=platform ) & !(layer<0) & name=* [0x11601 resolution 22-21]
+#( public_transport=platform & railway=platform ) & !(layer<0) & name=* [0x11601 resolution 22-19]
 public_transport=stop_position & train=yes [0x2f17 resolution 24]
-#public_transport=stop_position & train=yes [0x11601 resolution 22-21]
+#public_transport=stop_position & train=yes [0x11601 resolution 22-19]
 #public_transport=stop_position & trolleybus=yes [0x2f08 resolution 22]
 
 #( public_transport=platform & rail=yes ) | railway=halt [0x2f08 resolution 23]
@@ -503,7 +504,6 @@ tourism=attraction & historic=* [0x2c02 resolution 24]
 tourism=attraction [0x2c04 resolution 24]
 tourism=artwork [0x2c04 resolution 24]
 tourism=aquarium [0x2c07 resolution 24]
-
 tourism=camp_site | tourism=camp_pitch {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x2b03 resolution 19] #
 tourism=caravan_site {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x2b03 resolution 21] #
 leisure=summer_camp {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x2b03 resolution 21]
@@ -555,7 +555,7 @@ traffic_sign=city_limit [0x5600 resolution 21]
 highway=stop [0x5700 resolution 24]
 highway=give_way [0x5701 resolution 24]
 
-highway=ford | ford=yes | ford=stepping_stones [0x6406 resolution 21]	
+highway=ford | ford=yes | ford=stepping_stones [0x6406 resolution 22]	
 
 ### Добавляем еще разных точек ###
 # Залив, плес
