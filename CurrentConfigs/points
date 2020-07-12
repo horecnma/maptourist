@@ -536,8 +536,7 @@ tourism=viewpoint {name '${name} - ${description}' | '${name}'} [0x5200 resoluti
 tourism=wine_cellar | craft=winery [0x2c0a resolution 24]
 tourism=zoo [0x2c07 resolution 24]
 
-# highway=traffic_signals | crossing=traffic_signals [0x0640a resolution 24] # old - 0x1616
-highway=traffic_signals | crossing=traffic_signals [0x03301 resolution 24]
+# highway=traffic_signals | crossing=traffic_signals [0x03301 resolution 24]
 
 railway=level_crossing [0x6400 resolution 24]
 
