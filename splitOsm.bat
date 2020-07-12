@@ -1,12 +1,8 @@
-set SPLITTER_DIR=D:\gps\1_soft\splitter-r597
-set SOURCE_DIR=d:\gps\builds\source
-set SOURCE_FILE_NAME=sosnovka_test.osm
-set DESTINATION_DIR=D:\gps\builds\out_split
-set MAP_ID=63010001
+call %GPS_MAP_BUILDER_PROPERTIES_DIR%\map_builder_properties.cmd
 
-java.exe -Xmx2g -jar %SPLITTER_DIR%\splitter.jar^
-  --mapid=%MAP_ID%^
-  --description=%SOURCE_FILE_NAME%^
-  --output-dir=%DESTINATION_DIR%^
-  %SOURCE_DIR%\%SOURCE_FILE_NAME%
+java.exe -Xmx1g -jar %SPLIT_SPLITTER_DIR%\splitter.jar^
+  --mapid=%SPLIT_MAP_ID%^
+  --description=%SPLIT_SOURCE_FILE_NAME%^
+  --output-dir=%SPLIT_DESTINATION_DIR%^
+  %SPLIT_SOURCE_DIR%\%SPLIT_SOURCE_FILE_NAME%
 
