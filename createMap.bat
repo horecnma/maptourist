@@ -5,15 +5,20 @@ rem 4. see result in basecamp: mount virtual drive, copy imagesupp.img to VIRT_D
 
 call %GPS_MAP_BUILDER_PROPERTIES_DIR%\map_builder_properties.cmd
 
+if %CREATE_MAKE_TRANSPARRENT% == true (
+  set TRANSPARRENT=--transparent --draw-priority=30
+) else (
+  set TRANSPARRENT=
+)
 rem order is significant. -c template.args should be last
-rem 
+
 java -jar %CREATE_MKGMAP_DIR%\mkgmap.jar^
   --gmapsupp^
   --style-file=%CREATE_CONFIG_DIR%^
   --charset=windows-1251^
   --code-page=1251^
   --output-dir=%CREATE_DESTINATION_DIR%^
-  --transparent --draw-priority=30^
+  %TRANSPARRENT%^
   --family-id=840^
   -c %CREATE_CONFIG_DIR%\optionsfile.args^
   --road-name-config=%CREATE_CONFIG_DIR%\roadNameConfig.txt^

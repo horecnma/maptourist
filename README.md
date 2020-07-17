@@ -8,6 +8,7 @@ Styles and build scripts for creating maps like maptourist.org
 rem SPLIT_* variables are used on split phase. CREATE_* variables are used on map creation phase.
 rem SPLIT_SOURCE_FILE_NAME is *.osm  or *.pbf file in SPLIT_SOURCE_DIR directory
 rem SPLIT_MAP_ID should be unique otherwise only one map with same ID is visible
+rem set CREATE_MAKE_TRANSPARRENT=true for map with contour lines
 
 set SPLIT_SPLITTER_DIR=D:\gps_map_builder\splitter-r597
 set CREATE_MKGMAP_DIR=D:\gps_map_builder\mkgmap-r4562
@@ -16,6 +17,7 @@ set CREATE_CONFIG_DIR=D:\gps_map_builder\maptourist\CurrentConfigs
 set SPLIT_SOURCE_DIR=D:\gps_map_builder\build\source
 set SPLIT_SOURCE_FILE_NAME=kavkaz_osm.pbf
 set SPLIT_MAP_ID=63010012
+set CREATE_MAKE_TRANSPARRENT=true
 
 set SPLIT_DESTINATION_DIR=D:\gps_map_builder\build\out_split_srtm
 set CREATE_DESTINATION_DIR=D:\gps_map_builder\build\out_srtm
