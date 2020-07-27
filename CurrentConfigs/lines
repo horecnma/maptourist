@@ -81,19 +81,15 @@ then
 	highway=* & toll=yes { set name='${name} (платн.)' | 'платная' }
 	# грейдер
 	highway=* & surface=compacted & highway!=pedestrian & highway!=footway & highway!=path
-	{ name '${ref|highway-symbol:oval}'; 
-	addlabel '${name} (грейдер)' | '${name} (грейдер)' | 'грейдер'  }
+	{ set name='${name} (грейдер)' | 'грейдер' }
 	# гравийка
 	highway=* & surface=gravel& highway!=pedestrian & highway!=footway & highway!=path
-	{ name '${ref|highway-symbol:oval}'; 
-	addlabel '${name} (гравийка)' | '${name} (гравийка)' | 'гравийка' }
+	{ set name='${name} (гравийка)' | 'гравийка' }
 	# бетонка
 	highway=* & surface=concrete & highway!=pedestrian & highway!=footway & highway!=path
-	{ name '${ref|highway-symbol:oval}'; 
-	addlabel '${name} (бетонка)' | '${name} (бетонка)' | 'бетонка' }
+	{ set name='${name} (бетонка)' | 'бетонка' }
 	highway=* & surface=concrete:plates & highway!=pedestrian & highway!=footway & highway!=path
-	{ name '${ref|highway-symbol:oval}'; 
-	addlabel '${name} (бетонка)' | '${name} (бетонка)' | 'бетонка' }
+	{ set name='${name} (бетонка)' | 'бетонка' }
 	## недейств. ж/д (добавил в конец railway=disused)
 	railway=abandoned | (railway=* & abandoned=yes) | railway=disused
 	{ name '${name} (недейств. ж/д)' | 'недейств. ж/д' }
@@ -109,19 +105,15 @@ then
 	highway=* & toll=yes { set name='${name} (toll)' | 'toll road' }
 	# грейдер
 	highway=* & surface=compacted & highway!=pedestrian & highway!=footway & highway!=path
-	{ name '${ref|highway-symbol:oval}'; 
-	addlabel '${name} (comapcted)' | '${name} (comapcted)' | 'comapcted'  }
+	{ set name='${name} (comapcted)' | 'comapcted' }
 	# гравийка
 	highway=* & surface=gravel& highway!=pedestrian & highway!=footway & highway!=path
-	{ name '${ref|highway-symbol:oval}'; 
-	addlabel '${name} (gravel)' | '${name} (gravel)' | 'gravel' }
+	{ set name='${name} (gravel)' | 'gravel' }
 	# бетонка
 	highway=* & surface=concrete & highway!=pedestrian & highway!=footway & highway!=path
-	{ name '${ref|highway-symbol:oval}'; 
-	addlabel '${name} (concrete)' | '${name} (concrete)' | 'concrete' }
+	{ set name='${name} (concrete)' | 'concrete' }
 	highway=* & surface=concrete:plates & highway!=pedestrian & highway!=footway & highway!=path
-	{ name '${ref|highway-symbol:oval}'; 
-	addlabel '${name} (concrete)' | '${name} (concrete)' | 'concrete' }
+	{ set name='${name} (concrete)' | 'concrete' }
 	## недейств. ж/д (добавил в конец railway=disused)
 	railway=abandoned | (railway=* & abandoned=yes) | railway=disused
 	{ name '${name} (disused rail)' | 'disused rail' }
@@ -136,7 +128,7 @@ end
 highway=* & amenity=fuel | amenity=fuel & area=yes 
 	{delete highway; set highway=rest_area; set area=yes}
 
-aeroway=runway & highway!=* & is_closed()=false {name '${ref}'} [0x27 resolution 19]
+(aeroway=runway | aeroway=stopway) & highway!=* & is_closed()=false {name '${ref}'} [0x27 resolution 19]
 (aeroway=taxiway | aeroway=taxilane) & highway!=* & is_closed()=false {name '${ref}'} [0x10f06 resolution 22]
 
 # Mark highways with the toll flag
@@ -508,6 +500,28 @@ leisure=nature_reserve | leisure=natural_reserve | landuse=nature_reserve | land
 # Резервации
 (boundary=protected_area & protect_class=24) | boundary=aboriginal_lands [0x2a resolution 21 continue]
 
+### Building Contours
+#man_made=* & area=yes {delete name} [0x1010d resolution 24 continue]
+#(building=* | bridge=yes & area=yes) {delete name} [0x1010d resolution 24 continue]
+#tourism=attraction & building!=* & man_made!=* {delete name} [0x1010d resolution 24 continue]
+#historic=ruins & building=yes {delete name} [0x1010d resolution 24 continue]
+#man_made=* & area!=no
+#   & (man_made!=door 
+#   & man_made!=embankment 
+#   & man_made!=breakwater
+#   & man_made!=pier
+#   & man_made!=cable_line 
+#   & man_made!=cutline 
+#   & man_made!=cutting
+#   & man_made!=levee 
+#   & man_made!=trench
+#   & man_made!=wastewater_plant
+#   & man_made!=surveillance
+#   & man_made!=groyne 
+#   & man_made!=waterway
+#   & man_made!=reinforced_slope) {delete name} [0x1010d resolution 24 continue]
+### Building Contours
+
 include 'inc/water_lines';
 include 'inc/contour_lines';
 
@@ -537,18 +551,30 @@ mkgmap:bicycle=yes & (mkgmap:foot=no & mkgmap:car=no & mkgmap:street!=* | mkgmap
   {set mkgmap:numbers=false}
 
 # Display highway shield for mayor roads if they have a ref and make them searchable by their name
-(highway=motorway | highway=trunk) & ref=* 
-	{ name '${ref|highway-symbol:hbox}'; addlabel '${name}' }
-highway=primary & ref=* 
-	{ name '${ref|highway-symbol:box}'; addlabel '${name}' }
-(highway=secondary | highway=tertiary | highway=unclassified) & ref=* 
-	{ name '${ref|highway-symbol:oval}'; addlabel '${name}' }
+#USA
+#(highway=motorway | highway=trunk) & ref=* & network~'US:.*'
+#	{set ref='${ref|subst:[^0-9+]~>}'
+#	 name '${ref|highway-symbol:shield} ${name}'; addlabel '${name}' }
+#highway=primary & ref=* & network~'US:.*'
+#	{set ref='${ref|subst:[^0-9+]~>}'
+#	 name '${ref|highway-symbol:round} ${name}'; addlabel '${name}' }
+#USA
 
+(highway=motorway | highway=trunk) & ref=*
+	{set ref='${ref|subst:[\s-]~>|subst:[;,]~>/}'
+	 name '${ref|highway-symbol:hbox} ${name}'|'${ref|highway-symbol:hbox}'; addlabel '${name}' }
+highway=primary & ref=*
+	{set ref='${ref|subst:[\s-]~>|subst:[;,]~>/}'
+	 name '${ref|highway-symbol:box} ${name}'|'${ref|highway-symbol:box}'; addlabel '${name}' }
+(highway=secondary | highway=tertiary | highway=unclassified) & ref=*
+	{set ref='${ref|subst:[\s-]~>|subst:[;,]~>/}'
+	 name '${ref|highway-symbol:oval} ${name}'|'${ref|highway-symbol:oval}'; addlabel '${name}' }
 
 name=* { name '${name}' }
 
-highway=* & ref=* & highway!=motorway & highway!=trunk & highway!=primary & highway!=secondary & highway!=tertiary { addlabel '${ref}' }
+highway=* & ref=* & highway!=motorway & highway!=trunk & highway!=primary & highway!=secondary & highway!=tertiary 
+	{ set ref='${ref|subst:[\s-]~>|subst:[;]~>/}' addlabel '${ref}' }
 #highway=* & ref=*     { addlabel '${ref}' }
-highway=* & int_ref=* { addlabel '${int_ref}' }
-highway=* & nat_ref=* { addlabel '${nat_ref}' }
-highway=* & reg_ref=* { addlabel '${reg_ref}' }
+highway=* & int_ref=* { set int_ref='${int_ref|subst:[\s-]~>|subst:[;,]~>/}' addlabel '${int_ref}' }
+highway=* & nat_ref=* { set nat_ref='${nat_ref|subst:[\s-]~>|subst:[;,]~>/}' addlabel '${nat_ref}' }
+highway=* & reg_ref=* { set reg_ref='${reg_ref|subst:[\s-]~>|subst:[;,]~>/}' addlabel '${reg_ref}' }
