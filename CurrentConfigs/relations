@@ -94,6 +94,7 @@ type=route & route=road & historic!=yes & network~'US:US:.*'
     }
 }
 type=route & route=road & historic!=yes & network~'US:.*' & !(network=US:I | network=US:US | network~'US:.*:.*')
+#type=route & route=road & historic!=yes & network~'US:.*' & !(network=US:I | network=US:US)
 {
     apply {
         add mkgmap:us_state='$(mkgmap:us_state);${ref|not-contained:;:mkgmap:us_state}' | '$(mkgmap:us_state)' | '${ref}';

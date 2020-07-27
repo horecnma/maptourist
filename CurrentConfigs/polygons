@@ -28,14 +28,12 @@ end
 
 # Удаляем не нужный tourism (Hawaii island) 
 tourism=destination {delete tourism}
+# Удаляем не нужный building=no
 building=no {delete building}
 
 tourism=theme_park & building!=* [0x10f19 resolution 21]
 (tourism=resort | leisure=resort) & building!=* [0x10f19 resolution 21]
 tourism=hotel & building!=* [0x10f19 resolution 21]
-
-# Удаляем не нужный building=no
-building=no {delete building}
 
 leisure=* & sport=* { set name='${name} (${sport})' | '${sport}' }
 
@@ -283,6 +281,7 @@ natural=wood & (wood=coniferous | leaf_type=needleleaved) [0x10100 resolution 21
 natural=wood & (wood=deciduous  | leaf_type=broadleaved | leaf_cycle=deciduous) [0x10101 resolution 21]
 natural=wood [0x50 resolution 21]
 natural=valley & name=* [0x54 resolution 22]
+natural=desert [0x52 resolution 21]
 
 landcover=trees & natural!=wood & landuse!=forest & (wood=coniferous | leaf_type=needleleaved) [0x10100 resolution 21]
 landcover=trees & natural!=wood & landuse!=forest & (wood=deciduous | leaf_type=broadleaved)   [0x10101 resolution 21]
