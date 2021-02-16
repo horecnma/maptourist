@@ -274,7 +274,7 @@ natural=cliff [0x10f12 resolution 21]
 natural=stone [0x10f13 resolution 21]
 natural=bare_rock [0x10f13 resolution 21]
 natural=reef [0x10f13 resolution 18]
-natural=scrub [0x4f resolution 21]
+natural=scrub | wood:age=young | wood:age=very_young [0x4f resolution 21]
 natural=forest {set natural=wood}
 natural=wood & wood:density=sparse [0x10c02 resolution 21]
 natural=wood & (wood=coniferous | leaf_type=needleleaved) [0x10100 resolution 21]

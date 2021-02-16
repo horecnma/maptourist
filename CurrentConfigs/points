@@ -10,6 +10,20 @@
 
 addr:housenumber=* {set mkgmap:execute_finalize_rules=true}
 
+# убираем кавычки из всех названий
+name~'.*("+).*' {set name='${name|subst:["+]~>}'}
+name~'.*(\u00ab+).*' {set name='${name|subst:[\u00ab+]~>}'}
+name~'.*(\u00bb+).*' {set name='${name|subst:[\u00bb+]~>}'}
+description~'.*("+).*' {set description='${description|subst:["+]~>}'}
+description~'.*(\u00ab+).*' {set description='${description|subst:[\u00ab+]~>}'}
+description~'.*(\u00bb+).*' {set description='${description|subst:[\u00bb+]~>}'}
+operator~'.*("+).*' {set operator='${operator|subst:["+]~>}'}
+operator~'.*(\u00ab+).*' {set operator='${operator|subst:[\u00ab+]~>}'}
+operator~'.*(\u00bb+).*' {set operator='${operator|subst:[\u00bb+]~>}'}
+brand~'.*("+).*' {set brand='${brand|subst:["+]~>}'}
+brand~'.*(\u00ab+).*' {set brand='${brand|subst:[\u00ab+]~>}'}
+brand~'.*(\u00bb+).*' {set brand='${brand|subst:[\u00bb+]~>}'}
+
 include 'inc/status';
 
 boundary=administrative & admin_level=2 [0x01f00 resolution 16-16]
@@ -39,7 +53,7 @@ barrier=bus_trap
       add mkgmap:bicycle=yes; 
       addaccess no;
       set mkgmap:road-speed=1; }
-barrier=gate
+barrier=gate | barrier=sliding_gate
     { add mkgmap:bicycle=yes; 
       add mkgmap:foot=yes; 
       addaccess no;
@@ -220,7 +234,7 @@ amenity=fire_station [0x3008 resolution 24]
 amenity=food_court [0x2a13 resolution 24]
 amenity=bench [0x04a01 resolution 24]
 
-amenity=charging_station { name '${name} (${voltage}v)' | '${name}' | '${voltage}v' } [0x2f16 resolution 19]
+amenity=charging_station { name '${name} (${capacity})' | '${name}' | '${capacity}' } [0x2f16 resolution 19]
 amenity=fuel [0x2f01 resolution 24-19]
 amenity=fuel [0x11603 resolution 22-19]
 #amenity=fuel & fuel:HGV_diesel=yes [0x2f16 resolution 19] # точка перемещена в typ 2f19
@@ -331,8 +345,8 @@ highway=services & mkgmap:area2poi!=true [0x210f resolution 24]
 	{set distance:backward='${plk:backward}'; delete plk:backward}
 
 # highway=milestone | railway=milestone
-#	{name '${distance} (${distance:backward})' 
-#		| '${distance}' 
+#	{name '${distance} (${distance:backward})'
+#		| '${distance}'
 #		| '${distance:backward}'} [0x05a00 resolution 22]
 # highway=milestone | railway=milestone { name '${distance}'  | '${pk}' | '${pk:backward}' } [0x05a00 resolution 24]
 
@@ -344,7 +358,7 @@ historic=monument [0x5202 resolution 24]
 historic=fort [0x11604 resolution 21]
 historic=castle [0x11604 resolution 21]
 historic=boundary_stone | historic=milestone [0x11500 resolution 24]
-historic=tomb|cemetery=grave [0x6403 resolution 24]
+historic=tomb | cemetery=grave [0x6403 resolution 24]
 historic=wreck | seamark:type=wreck [0x4200 resolution 21]
 
 # Резервации
@@ -446,7 +460,7 @@ public_transport=platform & !(layer<0) & railway!=platform
 	| amenity=bus_station 
 	| railway=tram_stop [0x2f08 resolution 22]
 
-shop=bakers [0x2e02 resolution 24]
+shop=alcohol [0x2e10 resolution 24]
 shop=bakery [0x2e02 resolution 24]
 shop=beauty [0x2f10 resolution 24]
 shop=bicycle [0x2f13 resolution 24]
@@ -463,11 +477,11 @@ shop=car_rental [0x2f02 resolution 24]
 shop=car_repair [0x2f03 resolution 24]
 shop=car_wrecker [0x2f0a resolution 24]
 
-shop=outdoor [0x10f12 resolution 24]
+shop=outdoor [0x2e0f resolution 24]
 shop=optician [0x2e05 resolution 24] # оптика, как аптека
 shop=chemist [0x2e08 resolution 24]
 shop=clothes [0x2e07 resolution 24]
-(shop=computer | shop=electronics) [0x10f0c resolution 24]
+(shop=computer | shop=electronics) [0x2e0e resolution 24]
 shop=convenience [0x2e02 resolution 24]
 shop=department_store [0x2e01 resolution 24]
 shop=doityourself [0x2e09 resolution 24]
@@ -543,8 +557,8 @@ railway=level_crossing [0x6400 resolution 24]
 #barrier=bollard | barrier=bus_trap {addaccess = no; add bicycle = yes; add foot = yes} [0x660f resolution 24]
 #barrier=block | barrier=cycle_barrier | barrier=stile | barrier=kissing_gate {addaccess = no; add foot = yes} [0x660f resolution 24]
 barrier=bollard | barrier=bus_trap [0x660f resolution 24]
-barrier=block | barrier=cycle_barrier | barrier=stile | barrier=kissing_gate [0x660f resolution 24]
-barrier=gate [0x5801 resolution 24]
+barrier=block | barrier=cycle_barrier | barrier=stile [0x660f resolution 24]
+barrier=gate | barrier=sliding_gate | barrier=kissing_gate [0x5801 resolution 24]
 barrier=lift_gate | barrier=toll_booth | barrier=swing_gate [0x5800 resolution 24]
 barrier=log  [0x660f resolution 24]
 
@@ -554,7 +568,7 @@ traffic_sign=city_limit [0x5600 resolution 21]
 highway=stop [0x5700 resolution 24]
 highway=give_way [0x5701 resolution 24]
 
-highway=ford | ford=yes | ford=stepping_stones [0x6406 resolution 22]	
+highway=ford | ford=yes | ford=stepping_stones [0x6406 resolution 22]
 
 ### Добавляем еще разных точек ###
 # Залив, плес

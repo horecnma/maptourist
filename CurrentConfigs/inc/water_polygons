@@ -10,7 +10,7 @@ natural=mud [0x10f16 resolution 21]
 natural=waterfall | waterway=waterfall [0x47 resolution 21]
 natural=sea { add mkgmap:skipSizeFilter=true; set mkgmap:drawLevel=2 } [0x32 resolution 16 continue]
 
-waterway=riverbank [0x46 resolution 18]
+waterway=riverbank & natural!=water [0x46 resolution 18]
 
 waterway=dock [0x13 resolution 24]
 
@@ -27,7 +27,7 @@ waterway=rapid | waterway=rapids | whitewater=rapid | whitewater=rapids
 	| '${name}' } [0x10f18 resolution 18 continue]
 
 # Пересыхающие водоёмы
-natural=water & intermittent=yes [0x40 resolution 18]
+natural=water & (intermittent=yes | seasonal=yes) [0x40 resolution 18]
 
 natural=water & (name='Водоем' | name='Водоём' | name='водоем' | name='водоём') {delete name}
 

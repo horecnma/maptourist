@@ -12,6 +12,15 @@
 name~'.*("+).*' {set name='${name|subst:["+]~>}'}
 name~'.*(\u00ab+).*' {set name='${name|subst:[\u00ab+]~>}'}
 name~'.*(\u00bb+).*' {set name='${name|subst:[\u00bb+]~>}'}
+description~'.*("+).*' {set description='${description|subst:["+]~>}'}
+description~'.*(\u00ab+).*' {set description='${description|subst:[\u00ab+]~>}'}
+description~'.*(\u00bb+).*' {set description='${description|subst:[\u00bb+]~>}'}
+operator~'.*("+).*' {set operator='${operator|subst:["+]~>}'}
+operator~'.*(\u00ab+).*' {set operator='${operator|subst:[\u00ab+]~>}'}
+operator~'.*(\u00bb+).*' {set operator='${operator|subst:[\u00bb+]~>}'}
+brand~'.*("+).*' {set brand='${brand|subst:["+]~>}'}
+brand~'.*(\u00ab+).*' {set brand='${brand|subst:[\u00ab+]~>}'}
+brand~'.*(\u00bb+).*' {set brand='${brand|subst:[\u00bb+]~>}'}
 
 # Description to Name
 # копия из /name, но не set. Иначе задвоения в полигонах!
@@ -23,23 +32,23 @@ addr:housenumber=* {set mkgmap:execute_finalize_rules=true}
 include 'inc/status';
 
 # сокращаем статусные части названий улиц (пока отлючено)
-# name=* { name '${name|subst:улица=> ул.
-#		     |subst:переулок=> пер.
-#			 |subst:проспект=> пр-т
-#		     |subst:проезд=> пр-д
-#			 |subst:разъезд=> раз.
-#		     |subst:тракт=> тр-т
-#		     |subst:площадь=> пл.
-#		     |subst:имени=> им.
-#		     |subst:бульвар=> бл-р
-#		     |subst:шоссе=> ш.
-#		     |subst:дорога=> дор.
-#		     |subst:тупик=> туп.
-#		     |subst:микрорайон=> мкр
-#		     |subst:аллея=> алл.
-#		     |subst:линия=> лин.
-#		     |subst:набережная=> наб.
-#			}' }
+# name=* {  name '${name|subst:улица=> ул.
+#			|subst:переулок=> пер.
+#			|subst:проспект=> пр-т
+#			|subst:проезд=> пр-д
+#			|subst:разъезд=> раз.
+#			|subst:тракт=> тр-т
+#			|subst:площадь=> пл.
+#			|subst:имени=> им.
+#			|subst:бульвар=> бл-р
+#			|subst:шоссе=> ш.
+#			|subst:дорога=> дор.
+#			|subst:тупик=> туп.
+#			|subst:микрорайон=> мкр
+#			|subst:аллея=> алл.
+#			|subst:линия=> лин.
+#			|subst:набережная=> наб. }'
+#	 }
 
 ### taxi type is used for river routing
 highway=* {add taxi=no}
@@ -91,7 +100,7 @@ then
 	highway=* & surface=concrete:plates & highway!=pedestrian & highway!=footway & highway!=path
 	{ set name='${name} (бетонка)' | 'бетонка' }
 	## недейств. ж/д (добавил в конец railway=disused)
-	railway=abandoned | (railway=* & abandoned=yes) | railway=disused
+	railway=abandoned | (railway=* & abandoned=yes) | railway=disused | (disused:railway=rail & railway!=disused)
 	{ name '${name} (недейств. ж/д)' | 'недейств. ж/д' }
 	## недейств. ужд
 	railway=narrow_gauge & disused=yes { name '${name} (недейств. ужд)' | 'недейств. ужд' }
@@ -115,7 +124,7 @@ then
 	highway=* & surface=concrete:plates & highway!=pedestrian & highway!=footway & highway!=path
 	{ set name='${name} (concrete)' | 'concrete' }
 	## недейств. ж/д (добавил в конец railway=disused)
-	railway=abandoned | (railway=* & abandoned=yes) | railway=disused
+	railway=abandoned | (railway=* & abandoned=yes) | railway=disused | (disused:railway=rail & railway!=disused)
 	{ name '${name} (disused rail)' | 'disused rail' }
 	## недейств. ужд
 	railway=narrow_gauge & disused=yes { name '${name} (disused narrow rail)' | 'disused narrow rail' }
@@ -428,7 +437,7 @@ man_made=cutline & (power!=line | power!=minor_line) [0x0e road_class=0 road_spe
 
 #railway=abandoned [0x0a road_class=0 road_speed=1 resolution 22]
 railway=* & disused=yes [0x0b road_class=0 road_speed=0 resolution 21]
-railway=abandoned | railway=disused [0x0b road_class=0 road_speed=0 resolution 21]
+railway=abandoned | railway=disused  | (disused:railway=rail & railway!=disused) [0x0b road_class=0 road_speed=0 resolution 21]
 railway=narrow_gauge [0x10f05 resolution 18]
 railway=rail & service=*
 	{ name '${name} (${railway:track_ref})' 
@@ -445,6 +454,7 @@ railway=rail & service!=*
 railway=tram	[0x10f14 resolution 22 continue]
 railway=light_rail & !(layer<0) [0x10f14 resolution 22]
 railway=monorail [0x10f14 resolution 22 continue]
+railway=miniature [0x10f05 resolution 22]
 railway=subway & !(layer<0) [0x14 resolution 22]
 # railway=platform & area!=yes [0x16 road_class=0 road_speed=0 resolution 24 continue]
 (highway = platform | railway = platform ) & !(area = yes | is_closed() = true 
@@ -547,7 +557,12 @@ mkgmap:bicycle=yes & (mkgmap:foot=no & mkgmap:car=no & mkgmap:street!=* | mkgmap
   waterway=canal 	| waterway=river		| waterway=rapid 
 | waterway=rapids 	| whitewater=rapid 		| whitewater=rapids 
 | waterway=drain 	| waterway=stream 		
-| (highway=path & name!=*)	| (highway=footway & name!=*) | (highway=byway & name!=*) | (highway=pedestrian & name!=*)
+| (highway=path & name!=*)	
+| (highway=footway & name!=*) 
+| (highway=byway & name!=*) 
+| (highway=pedestrian & name!=*)
+| highway=cycleway
+| highway=bridleway
   {set mkgmap:numbers=false}
 
 # Display highway shield for mayor roads if they have a ref and make them searchable by their name
