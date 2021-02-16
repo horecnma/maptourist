@@ -26,6 +26,6 @@ set CREATE_DESTINATION_DIR=D:\gps_map_builder\build\out_srtm
 4. Run splitOsm.bat. It prepares data for map creation. Result files are stored in SPLIT_DESTINATION_DIR.
 5. Run createMap.bat. It builds map. Result files are stored in CREATE_DESTINATION_DIR. Set transparent flag in createMap.bat manually for map with contour lines)
 
-## Branshes:
+## Branches:
 + source - originals files from https://maptourist.org/osm-garmin/CurrentConfigs/
 + master - custom changes
