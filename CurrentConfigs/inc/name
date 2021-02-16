@@ -2,6 +2,15 @@
 name~'.*("+).*' {set name='${name|subst:["+]~>}'}
 name~'.*(\u00ab+).*' {set name='${name|subst:[\u00ab+]~>}'}
 name~'.*(\u00bb+).*' {set name='${name|subst:[\u00bb+]~>}'}
+description~'.*("+).*' {set description='${description|subst:["+]~>}'}
+description~'.*(\u00ab+).*' {set description='${description|subst:[\u00ab+]~>}'}
+description~'.*(\u00bb+).*' {set description='${description|subst:[\u00bb+]~>}'}
+operator~'.*("+).*' {set operator='${operator|subst:["+]~>}'}
+operator~'.*(\u00ab+).*' {set operator='${operator|subst:[\u00ab+]~>}'}
+operator~'.*(\u00bb+).*' {set operator='${operator|subst:[\u00bb+]~>}'}
+brand~'.*("+).*' {set brand='${brand|subst:["+]~>}'}
+brand~'.*(\u00ab+).*' {set brand='${brand|subst:[\u00ab+]~>}'}
+brand~'.*(\u00bb+).*' {set brand='${brand|subst:[\u00bb+]~>}'}
 
 # Rules for naming objects, based on the following tags:
 # name, brand, operator, ref
@@ -25,8 +34,9 @@ description="grazing land" {delete description}
 description="rural residential" {delete description}
 description="farmland of local importance" {delete description}
 
-# Description to Name 
-# дублируется в файле lines
+# Description to Name
+# (дублируется в файле lines)
+place=* & description=* { delete description } 
 (name=* & description=*)|(name=* & description!=*)|(name!=* & description=*) 
 	{ set name='${name} (${description})'|'${name}'|'${description}' }
 
@@ -37,11 +47,11 @@ brand=${name}     { delete brand; }
 
 # None of operator, brand given
 ref=* & (operator!=* & brand!=*) & (highway=bus_stop | railway=tram_stop | railway=halt | railway=station) { name '${name} ${ref}' | '${ref}' }
-ref=* & (operator!=* & brand!=*) { name '${name}: ${ref}' | '${ref}' }
+ref=* & (operator!=* & brand!=*) { set name='${name}: ${ref}' | '${ref}' }
 
 # Both operator and brand given
 operator=* & brand=* {
- name '${name}: ${brand} ${ref} (${operator})' |
+ set name='${name}: ${brand} ${ref} (${operator})' |
       '${brand}: ${ref} (${operator})' |
       '${name}: ${brand} (${operator})' |
       '${brand} (${operator})'
@@ -49,14 +59,14 @@ operator=* & brand=* {
 
 # One of operator or brand given
 operator=* & brand!=* & (highway=bus_stop | railway=tram_stop | railway=halt | railway=station) {
- name '${name}: ${ref} (${operator})' |
+ set name='${name}: ${ref} (${operator})' |
       '${name} (${operator})' |
       '${ref} (${operator})' |
       '${operator}'
 }
 
 operator=* & brand!=* {
- name '${name} (${operator}) ${ref}' |
+ set name='${name} (${operator}) ${ref}' |
       '${name} (${operator})' |
       '${operator}: ${ref}' |
       '${operator}' |
@@ -64,7 +74,7 @@ operator=* & brand!=* {
 }
 
 brand=* & operator!=* {
- name '${name}: ${brand} ${ref}' |
+ set name='${name}: ${brand} ${ref}' |
       '${name}: ${brand}' | 
       '${brand}: ${ref}' |
       '${brand}' |

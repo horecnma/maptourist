@@ -7,7 +7,6 @@ mkgmap:admin_level6 ~ '.*(городской округ).*' {set mkgmap:admin_le
 mkgmap:admin_level6 ~ '.*(городской Совет).*' {set mkgmap:admin_level6='${mkgmap:admin_level6|subst: городской Совет=>} горсовет'} #BLR
 mkgmap:admin_level8 ~ '.*(городское поселение).*' {set mkgmap:admin_level8='${mkgmap:admin_level8|subst:городское поселение =>|subst: городское поселение=>} ГП'}
 mkgmap:admin_level8 ~ '.*(сельское поселение).*' {set mkgmap:admin_level8='${mkgmap:admin_level8|subst:сельское поселение =>|subst: сельское поселение=>} СП'}
-#mkgmap:admin_level8 ~ '.*(сельсовет).*' {set mkgmap:admin_level8='${mkgmap:admin_level8|subst: сельсовет=>} СС'}
 mkgmap:admin_level8 ~ '.*(волость).*' {set mkgmap:admin_level8='${mkgmap:admin_level8|subst: волость=>} Вл'}
 mkgmap:admin_level8 ~ '.*(сельский Совет).*' {set mkgmap:admin_level8='${mkgmap:admin_level8|subst: сельский Совет=>} сельсовет'} #BLR
-
+mkgmap:admin_level6 ~ '.*(городской совет).*' {set mkgmap:admin_level6='${mkgmap:admin_level6|subst: городской совет=>} горсовет'} #UKR
