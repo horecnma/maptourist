@@ -6,8 +6,8 @@ Styles and build scripts for creating maps like maptourist.org
 2. Create file `map_builder_properties.cmd` and set your paths:
 ```bat
 rem SPLIT_* variables are used on split phase. CREATE_* variables are used on map creation phase.
-rem SPLIT_SOURCE_FILE_NAME is *.osm  or *.pbf file in SPLIT_SOURCE_DIR directory
-rem SPLIT_MAP_ID should be unique otherwise only one map with same ID is visible
+rem SPLIT_SOURCE_FILE_NAME is *.osm  or *.pbf file in your SPLIT_SOURCE_DIR directory
+rem SPLIT_MAP_ID is random but should be unique in your device otherwise only one map with same ID is visible
 rem set CREATE_MAKE_TRANSPARRENT=true for map with contour lines
 
 set SPLIT_SPLITTER_DIR=D:\gps_map_builder\splitter-r597
