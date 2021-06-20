@@ -2557,12 +2557,10 @@ NightcustomColor:#00CAFF
 Type=0x20
 ;GRMN_TYPE: Contour Lines/MINOR_CONTOUR/Minor land-based contour line/Non NT
 UseOrientation=Y
-Xpm="32 1 4  1"
-"! c #FF9500"
+Xpm="32 1 2  1"
+"! c #BD6520"
 "  c none"
-"3 c #FFCA8B"
-"4 c none"
-"!!!!    !!!!    !!!!    !!!!    "
+"!!!!!   !!!!!   !!!!!   !!!!!   "
 ;12345678901234567890123456789012
 String1=0x19,вспомогательная горизонталь
 String2=0x04,minor elevation
@@ -2579,9 +2577,8 @@ Type=0x21
 ;GRMN_TYPE: Contour Lines/INT_CONTOUR/Intermediate contour (should be used for about every 5th contour line)/Non NT
 UseOrientation=Y
 LineWidth=1
-Xpm="0 0 2 0"
-"1 c #FF9500"
-"2 c #FFCA8B"
+Xpm="0 0 1 0"
+"1 c #BD6520"
 String1=0x19,основная горизонталь
 String2=0x04,medium elevation
 ExtendedLabels=Y
@@ -2595,11 +2592,10 @@ NightcustomColor:#FFCA8B
 [_line]
 Type=0x22
 ;GRMN_TYPE: Contour Lines/MAJOR_CONTOUR/Major contour (should be used for about every 10th contour line)/Non NT
-UseOrientation=Y
+UseOrientation=N
 LineWidth=2
-Xpm="0 0 2 0"
-"1 c #FF9500"
-"2 c #FFCA8B"
+Xpm="0 0 1 0"
+"1 c #BD6520"
 String1=0x19,утолщённая горизонталь
 String2=0x04,major elevation
 ExtendedLabels=Y
