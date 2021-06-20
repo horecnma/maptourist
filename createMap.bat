@@ -8,6 +8,10 @@ rem Osm raw data and contours can be downloaded from bbbike or another sites.
 
 call %GPS_MAP_BUILDER_PROPERTIES_DIR%\map_builder_properties.cmd
 
+set SPLIT_DESTINATION_DIR=%SPLIT_SOURCE_DIR%\split
+set CREATE_DESTINATION_DIR=%SPLIT_SOURCE_DIR%\out_map
+if not exist "%CREATE_DESTINATION_DIR%" mkdir %CREATE_DESTINATION_DIR%
+
 if %CREATE_MAKE_TRANSPARRENT% == true (
 rem use   --transparent --draw-priority=30^  for map with contours
   set TRANSPARRENT=--transparent --draw-priority=30
