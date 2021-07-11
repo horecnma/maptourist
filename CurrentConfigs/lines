@@ -296,14 +296,10 @@ highway=* & (
 highway=* & mkgmap:unpaved!=1 & smoothness ~ '.*(bad|horrible|impassable)'  { add mkgmap:road-speed = '-2' } 
 
 ## Там где surface важнее класса
-mkgmap:unpaved=1 & highway=primary
-[0x12 road_class=1 road_speed=2 resolution 18]
-mkgmap:unpaved=1 & highway=secondary
-[0x12 road_class=1 road_speed=2 resolution 18]
-mkgmap:unpaved=1 & highway=tertiary
-[0x13 road_class=1 road_speed=2 resolution 19]
-mkgmap:unpaved=1 & highway=unclassified
-[0x13 road_class=1 road_speed=2 resolution 19]
+mkgmap:unpaved=1 & highway=primary      [0x12 road_class=1 road_speed=2 resolution 18]
+mkgmap:unpaved=1 & highway=secondary    [0x12 road_class=1 road_speed=2 resolution 18]
+mkgmap:unpaved=1 & highway=tertiary     [0x13 road_class=1 road_speed=2 resolution 19]
+mkgmap:unpaved=1 & highway=unclassified [0x13 road_class=1 road_speed=2 resolution 19]
 #####
 
 # Good ways without relation

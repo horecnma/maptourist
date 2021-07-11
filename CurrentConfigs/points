@@ -564,9 +564,9 @@ barrier=log  [0x660f resolution 24]
 
 amenity=signpost { name '${label}' } [0x5a00 resolution  21]
 
-traffic_sign=city_limit [0x5600 resolution 21]
+#traffic_sign=city_limit [0x5600 resolution 21]
 highway=stop [0x5700 resolution 24]
-highway=give_way [0x5701 resolution 24]
+#highway=give_way [0x5701 resolution 24]
 
 highway=ford | ford=yes | ford=stepping_stones [0x6406 resolution 22]
 
