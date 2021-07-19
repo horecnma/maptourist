@@ -4465,7 +4465,7 @@ DayXpm="14 16 3 1"   Colormode=16
 
 
 [_point]
-Type=0x02b03
+Type=0x04800
 ;GRMN_TYPE: Business - Lodging/CAMPGROUND/Campground/Non NT
 String1=0x19,стоянка
 String2=0x04,camp site

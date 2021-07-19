@@ -2,7 +2,7 @@
 Styles and build scripts for creating maps like maptourist.org
 
 ## Usage:
-1. Download *.osm or *.pbf raw data (bbbike or other sites)
+1. Download *.osm or *.pbf raw data (bbbike, download.geofabrik.de or other sites)
 2. Create file `map_builder_properties.cmd` and set your paths:
 ```bat
 rem SPLIT_* variables are used on split phase. CREATE_* variables are used on map creation phase.

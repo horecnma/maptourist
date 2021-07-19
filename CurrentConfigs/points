@@ -518,9 +518,9 @@ tourism=attraction & historic=* [0x2c02 resolution 24]
 tourism=attraction [0x2c04 resolution 24]
 tourism=artwork [0x2c04 resolution 24]
 tourism=aquarium [0x2c07 resolution 24]
-tourism=camp_site | tourism=camp_pitch {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x2b03 resolution 19] #
-tourism=caravan_site {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x2b03 resolution 21] #
-leisure=summer_camp {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x2b03 resolution 21]
+tourism=camp_site | tourism=camp_pitch {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x4800 resolution 22] #
+tourism=caravan_site {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x4800 resolution 22] #
+leisure=summer_camp {name '${name} (capacity: ${capacity})' | '(capacity: ${capacity})' | '${name}'} [0x4800 resolution 22]
 tourism=apartment [0x2b04 resolution 24]
 tourism=chalet [0x2b00 resolution 24]
 tourism=guest_house [0x2b00 resolution 24]
