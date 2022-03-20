@@ -1,4 +1,4 @@
-call %GPS_MAP_BUILDER_PROPERTIES_DIR%\map_builder_properties.cmd
+call map_builder_properties.cmd
 
 set SPLIT_DESTINATION_DIR=%SPLIT_SOURCE_DIR%\split
 if not exist "%SPLIT_DESTINATION_DIR%" mkdir %SPLIT_DESTINATION_DIR%

@@ -3,10 +3,10 @@ rem 2. split *.osm data with splitter.jar. Result is multiple small *.osm files 
 rem 3. run this bat file. Result is imagesupp.img in output directory
 rem 4. see result in basecamp: mount virtual drive, copy imagesupp.img to VIRT_DRIVE:/Garmin/, use JaVaWa Device Manager to import map from virtual drive to BaseCamp, start BaseCamp
 
-rem If map is created with contours then create osm map and map with contours. Map with contours should be transparent and have priority>25(default). Then join 2 maps with gmt.
-rem Osm raw data and contours can be downloaded from bbbike or another sites.
+rem If you want co create a map with contours then create 2 separate maps: osm map and map with contours. Map with contours should be transparent and has priority>25(default). Then join 2 maps with gmt.
+rem Osm raw data and contours can be downloaded from bbbike/download.geofabrik.de or another sites.
 
-call %GPS_MAP_BUILDER_PROPERTIES_DIR%\map_builder_properties.cmd
+call map_builder_properties.cmd
 
 set SPLIT_DESTINATION_DIR=%SPLIT_SOURCE_DIR%\split
 set CREATE_DESTINATION_DIR=%SPLIT_SOURCE_DIR%\out_map
@@ -27,6 +27,7 @@ java -Xmx2000M -jar %CREATE_MKGMAP_DIR%\mkgmap.jar^
   --code-page=1251^
   --output-dir=%CREATE_DESTINATION_DIR%^
   %TRANSPARRENT%^
+  --mapname=%SPLIT_MAP_ID%^
   --family-id=480^
   -c %CREATE_CONFIG_DIR%\optionsfile.args^
   --road-name-config=%CREATE_CONFIG_DIR%\roadNameConfig.txt^

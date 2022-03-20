@@ -3,7 +3,7 @@ Styles and build scripts for creating maps like maptourist.org
 
 ## Usage:
 1. Download *.osm or *.pbf raw data (bbbike, download.geofabrik.de or other sites)
-2. Create file `map_builder_properties.cmd` and set your paths:
+2. Create file `map_builder_properties.cmd` in this folder and set your paths:
 ```bat
 rem SPLIT_* variables are used on split phase. CREATE_* variables are used on map creation phase.
 rem SPLIT_SOURCE_FILE_NAME is *.osm  or *.pbf file in your SPLIT_SOURCE_DIR directory
@@ -22,9 +22,8 @@ set CREATE_MAKE_TRANSPARRENT=true
 set SPLIT_DESTINATION_DIR=D:\gps_map_builder\build\out_split_srtm
 set CREATE_DESTINATION_DIR=D:\gps_map_builder\build\out_srtm
 ```
-3. Create system variable `GPS_MAP_BUILDER_PROPERTIES_DIR=<dir_with__map_builder_properties.cmd>`
-4. Run splitOsm.bat. It prepares data for map creation. Result files are stored in SPLIT_DESTINATION_DIR.
-5. Run createMap.bat. It builds map. Result files are stored in CREATE_DESTINATION_DIR. Set transparent flag in createMap.bat manually for map with contour lines)
+3. Run splitOsm.bat. It prepares data for map creation. Result files are stored in SPLIT_DESTINATION_DIR.
+4. Run createMap.bat. It builds map. Result files are stored in CREATE_DESTINATION_DIR)
 
 ## Branches:
 + source - originals files from https://maptourist.org/osm-garmin/CurrentConfigs/
