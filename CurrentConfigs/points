@@ -401,11 +401,11 @@ natural=volcano [0x05203 resolution 18]
 natural=reef [0x1040c resolution 18]
 natural=valley & name=* [0x6617 resolution 21]
 
-# natural=beach [0x6604 resolution 24] ### in ./inc/water_points
-# natural=glacier [0x650a resolution 21] ### in ./inc/water_points
-# natural=spring [0x6511 resolution 22] ### in ./inc/water_points
-# natural=hot_spring [0x13703 resolution 22] ### in ./inc/water_points
-# natural=stream & name=* [0x6512 resolution 22] ### in ./inc/water_points
+### see ./inc/water_points  # natural=beach [0x6604]
+### see ./inc/water_points  # natural=glacier [0x650a]
+### see ./inc/water_points  # natural=spring [0x6511]
+### see ./inc/water_points  # natural=hot_spring [0x13703]
+### see ./inc/water_points  # natural=stream & name=* [0x6512]
 
 natural=ridge & name=* [0x06613 resolution 21]
 natural=stone [0x6615 resolution 21]
