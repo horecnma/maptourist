@@ -20,7 +20,7 @@ rem use   --transparent --draw-priority=30^  for map with contours
 )
 rem order is significant. -c template.args should be last
 rem family-id is same as FID in OSM-2018.txt
-java -Xmx2000M -jar %CREATE_MKGMAP_DIR%\mkgmap.jar^
+java -Xmx6000M -jar %CREATE_MKGMAP_DIR%\mkgmap.jar^
   --gmapsupp^
   --style-file=%CREATE_CONFIG_DIR%^
   --charset=windows-1251^
